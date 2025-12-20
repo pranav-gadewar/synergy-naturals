@@ -1,0 +1,91 @@
+synergy-naturals/
+│
+├── app/
+│
+│   ├── (public)/
+│   │   ├── page.tsx                     # Home
+│   │   ├── about/page.tsx               # Company profile, trust, clients
+│   │   ├── products/
+│   │   │   ├── page.tsx                 # All products
+│   │   │   ├── machines/
+│   │   │   │   ├── page.tsx             # Oil machines listing
+│   │   │   │   └── [slug]/page.tsx      # Machine with specs
+│   │   │   ├── oils/
+│   │   │   │   └── [slug]/page.tsx
+│   │   │   ├── organic/
+│   │   │   │   └── [slug]/page.tsx
+│   │   │   └── vegan/
+│   │   │       └── [slug]/page.tsx
+│   │   │
+│   │   ├── services/
+│   │   │   ├── page.tsx                 # Unit setup, catering
+│   │   │   └── catering/page.tsx
+│   │   │
+│   │   ├── collaborations/page.tsx     # Retailers, hotels, ethical sourcing
+│   │   ├── contact/page.tsx
+│
+│   ├── auth/
+│   │   ├── login/page.tsx
+│   │   ├── signup/page.tsx
+│   │   └── forgot-password/page.tsx
+│
+│   ├── dashboard/
+│   │
+│   │   ├── user/
+│   │   │   ├── layout.tsx
+│   │   │   ├── page.tsx                 # User overview
+│   │   │   ├── profile/page.tsx
+│   │   │   ├── cart/page.tsx
+│   │   │   ├── orders/page.tsx
+│   │   │   ├── track/page.tsx
+│   │   │   ├── payments/page.tsx
+│   │   │   └── requests/page.tsx        # Service / wholesale requests
+│
+│   │   ├── admin/
+│   │   │   ├── layout.tsx
+│   │   │   ├── page.tsx
+│   │   │   ├── profile/page.tsx
+│   │   │   ├── products/
+│   │   │   │   ├── page.tsx
+│   │   │   │   ├── add/page.tsx
+│   │   │   │   └── edit/[id]/page.tsx
+│   │   │   ├── categories/page.tsx
+│   │   │   ├── orders/page.tsx
+│   │   │   ├── payments/page.tsx
+│   │   │   ├── requests/page.tsx        # Collaborations & services
+│   │   │   ├── issues/page.tsx
+│   │   │   └── users/page.tsx
+│
+│   ├── api/
+│   │   ├── products/
+│   │   ├── machines/
+│   │   ├── orders/
+│   │   ├── payments/
+│   │   ├── requests/
+│   │   └── issues/
+│
+├── components/
+│   ├── common/
+│   ├── product/
+│   ├── machine/
+│   ├── dashboard/
+│   └── forms/
+│
+├── lib/
+│   ├── supabase/
+│   │   ├── client.ts
+│   │   ├── server.ts
+│   │   └── middleware.ts
+│   ├── auth.ts
+│   ├── payments.ts
+│   └── utils.ts
+│
+├── hooks/
+├── store/
+├── types/
+├── middleware.ts
+├── public/
+│   ├── logo/
+│   └── product-images/
+│
+└── .env.local

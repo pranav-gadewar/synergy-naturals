@@ -1,0 +1,118 @@
+"use client";
+
+import { useState } from "react";
+
+export default function ContactPage() {
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("loading");
+
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) throw new Error("Failed");
+
+      setStatus("success");
+      e.currentTarget.reset();
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  return (
+    <section className="bg-white">
+      {/* Header */}
+      <div className="bg-green-50">
+        <div className="mx-auto max-w-7xl px-6 py-20 text-center">
+          <span className="mb-4 inline-block rounded-full bg-green-100 px-4 py-1 text-sm font-medium text-green-700">
+            Get in Touch
+          </span>
+          <h1 className="text-4xl font-bold text-gray-900 md:text-5xl">
+            Contact <span className="text-green-700">Synergy</span>{" "}
+            <span className="text-orange-600">Naturals</span>
+          </h1>
+          <p className="mx-auto mt-6 max-w-3xl text-lg text-gray-600">
+            Have questions about machines, wholesale supply, unit setup, catering,
+            or collaborations? Reach out to us — we’ll get back to you shortly.
+          </p>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="mx-auto max-w-7xl px-6 py-20">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
+          
+          {/* Contact Info */}
+          <div>
+            <h2 className="mb-6 text-2xl font-bold text-gray-900">
+              Contact Information
+            </h2>
+
+            <p className="mb-4 text-gray-600">
+              📍 <strong>Bangalore, India</strong>
+            </p>
+
+            <p className="mb-2 text-gray-600">
+              📞 <a href="tel:+919440293257" className="text-green-700 font-semibold">+91 94402 93257</a>
+            </p>
+
+            <p className="mb-4 text-gray-600">
+              📞 <a href="tel:+919652151104" className="text-green-700 font-semibold">+91 96521 51104</a>
+            </p>
+
+            <p className="mb-6 text-gray-600">
+              💬 <a href="https://wa.me/919440293257" target="_blank" className="text-orange-600 font-semibold">WhatsApp Enquiry</a>
+            </p>
+
+            <div className="rounded-xl bg-green-50 p-6">
+              <p className="text-gray-700 font-medium">
+                Business Hours
+              </p>
+              <p className="text-gray-600 mt-2">
+                Monday – Saturday<br />
+                9:30 AM – 6:30 PM
+              </p>
+            </div>
+          </div>
+
+          {/* Contact Form */}
+          <div className="rounded-2xl border border-gray-100 p-8 shadow-sm">
+            <h2 className="mb-6 text-2xl font-bold text-gray-900">
+              Send Us a Message
+            </h2>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <input name="name" required placeholder="Your Name" className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none" />
+              <input name="email" type="email" required placeholder="Your Email" className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none" />
+              <input name="phone" required placeholder="Phone Number" className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none" />
+              <textarea name="message" required rows={4} placeholder="Your Message" className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none" />
+
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="w-full rounded-md bg-green-700 px-6 py-3 font-semibold text-white transition hover:bg-green-800 disabled:opacity-60"
+              >
+                {status === "loading" ? "Sending..." : "Submit Enquiry"}
+              </button>
+
+              {status === "success" && (
+                <p className="text-green-700 font-medium">Message sent successfully!</p>
+              )}
+              {status === "error" && (
+                <p className="text-red-600 font-medium">Something went wrong. Please try again.</p>
+              )}
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
