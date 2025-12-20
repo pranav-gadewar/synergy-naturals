@@ -106,7 +106,7 @@ export default function Services() {
               className="group relative rounded-xl border border-gray-100 bg-white p-6 shadow-sm transition hover:shadow-lg"
             >
               {/* Accent border */}
-              <div className="absolute inset-x-0 top-0 h-1 rounded-t-xl bg-gradient-to-r from-green-600 to-orange-500 opacity-0 transition group-hover:opacity-100" />
+              <div className="absolute inset-x-0 top-0 h-1 rounded-t-xl bg-linear-to-r from-green-600 to-orange-500 opacity-0 transition group-hover:opacity-100" />
 
               <motion.div
                 whileHover={{ scale: 1.05 }}
