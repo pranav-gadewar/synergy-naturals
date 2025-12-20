@@ -35,7 +35,7 @@ export default function CollaborationsPage() {
             </p>
           </div>
 
-          <div className="rounded-2xl bg-gradient-to-br from-green-50 to-orange-50 p-8 shadow">
+          <div className="rounded-2xl bg-linear-to-br from-green-50 to-orange-50 p-8 shadow">
             <ul className="space-y-4 text-gray-700 font-medium">
               <li>✔ 7,000+ installations across India</li>
               <li>✔ Trusted by temples, hotels, dairy farms & institutions</li>

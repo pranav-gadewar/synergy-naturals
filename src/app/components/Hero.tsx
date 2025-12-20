@@ -52,7 +52,7 @@ export default function Hero() {
 
         {/* Right Visual */}
         <div className="relative">
-          <div className="rounded-2xl bg-gradient-to-br from-green-50 to-orange-50 p-6 shadow-lg">
+          <div className="rounded-2xl bg-linear-to-br from-green-50 to-orange-50 p-6 shadow-lg">
             <img
               src="/Hero/machine-hero.png"
               alt="Cold Press Oil Machine"
