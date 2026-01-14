@@ -5,11 +5,41 @@ import { motion } from "framer-motion";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
-    e.currentTarget.reset();
+    setLoading(true);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const res = await fetch("/api/send-mail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          message: `
+Phone: ${formData.get("phone")}
+
+${formData.get("message")}
+          `,
+        }),
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+        form.reset();
+      } else {
+        console.error("Mail sending failed");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -117,22 +147,26 @@ export default function ContactPage() {
             {!submitted ? (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <input
+                  name="name"
                   required
                   placeholder="Your Name"
                   className="w-full rounded-md border border-gray-300 px-4 py-3 transition focus:border-green-600 focus:ring-1 focus:ring-green-600 focus:outline-none"
                 />
                 <input
+                  name="email"
                   type="email"
                   required
                   placeholder="Your Email"
                   className="w-full rounded-md border border-gray-300 px-4 py-3 transition focus:border-green-600 focus:ring-1 focus:ring-green-600 focus:outline-none"
                 />
                 <input
+                  name="phone"
                   required
                   placeholder="Phone Number"
                   className="w-full rounded-md border border-gray-300 px-4 py-3 transition focus:border-green-600 focus:ring-1 focus:ring-green-600 focus:outline-none"
                 />
                 <textarea
+                  name="message"
                   rows={4}
                   required
                   placeholder="Your Message"
@@ -140,10 +174,11 @@ export default function ContactPage() {
                 />
 
                 <button
+                  disabled={loading}
                   type="submit"
-                  className="w-full rounded-md bg-green-700 px-6 py-3 font-semibold text-white transition hover:scale-[1.02] hover:bg-green-800"
+                  className="w-full rounded-md bg-green-700 px-6 py-3 font-semibold text-white transition hover:scale-[1.02] hover:bg-green-800 disabled:opacity-60"
                 >
-                  Submit Enquiry
+                  {loading ? "Sending..." : "Submit Enquiry"}
                 </button>
               </form>
             ) : (
